@@ -1,0 +1,1291 @@
+const THEMES = [
+  "Nombres et calculs",
+  "Calcul littéral et équations",
+  "Organisation de données et fonctions",
+  "Espace et géométrie",
+  "Algorithmique"
+];
+
+const chapters = [
+  {
+    id: "calculs",
+    theme: "Nombres et calculs",
+    icon: "➗",
+    title: "Calculs, fractions et priorités",
+    short: "Savoir calculer avec des nombres relatifs, des fractions et les priorités opératoires.",
+    summary: "Ce chapitre sert à sécuriser les bases : signes, priorités, fractions, simplifications et calculs exacts. Au brevet, ces savoir-faire apparaissent souvent dans les premières questions ou dans un problème plus long.",
+    keywords: ["fraction", "fractions", "calcul", "priorités", "relatif", "relatifs", "signe", "négatif", "positif"],
+    method: [
+      "Commencer par les parenthèses.",
+      "Faire ensuite les multiplications et divisions avant les additions et soustractions.",
+      "Pour additionner des fractions, les mettre au même dénominateur.",
+      "Toujours vérifier le signe du résultat avant de simplifier."
+    ],
+    cards: [
+      ["Priorités opératoires", "Parenthèses d’abord, puis multiplications/divisions, puis additions/soustractions."],
+      ["Addition de deux nombres négatifs", "On additionne les distances à zéro et on garde le signe moins. Exemple : -4 + (-7) = -11."],
+      ["Soustraction d’un nombre relatif", "Soustraire un nombre revient à ajouter son opposé. Exemple : 5 - (-3) = 5 + 3 = 8."],
+      ["Multiplier deux nombres négatifs", "Le résultat est positif. Exemple : (-6) × (-4) = 24."],
+      ["Addition de fractions", "Il faut un dénominateur commun. Exemple : 1/3 + 1/6 = 2/6 + 1/6 = 3/6 = 1/2."],
+      ["Fraction irréductible", "Une fraction est irréductible quand le numérateur et le dénominateur n’ont plus de diviseur commun autre que 1."]
+    ]
+  },
+  {
+    id: "puissances",
+    theme: "Nombres et calculs",
+    icon: "🔟",
+    title: "Puissances et écriture scientifique",
+    short: "Comprendre les puissances, les puissances de 10 et l’écriture scientifique.",
+    summary: "Les puissances permettent d’écrire simplement des nombres très grands ou très petits. L’écriture scientifique est essentielle pour les problèmes de grandeurs, sciences et conversions.",
+    keywords: ["puissance", "puissances", "scientifique", "écriture scientifique", "10", "exposant"],
+    method: [
+      "Pour multiplier deux puissances de 10, on additionne les exposants.",
+      "Pour diviser deux puissances de 10, on soustrait les exposants.",
+      "Une écriture scientifique a la forme a × 10ⁿ avec 1 ≤ a < 10.",
+      "Faire attention aux exposants négatifs pour les nombres très petits."
+    ],
+    cards: [
+      ["10³", "10³ = 10 × 10 × 10 = 1000."],
+      ["10⁻²", "10⁻² = 1/100 = 0,01."],
+      ["Produit de puissances de 10", "10ᵃ × 10ᵇ = 10ᵃ⁺ᵇ."],
+      ["Quotient de puissances de 10", "10ᵃ ÷ 10ᵇ = 10ᵃ⁻ᵇ."],
+      ["Écriture scientifique", "C’est une écriture de la forme a × 10ⁿ avec 1 ≤ a < 10."],
+      ["Exemple", "56 000 = 5,6 × 10⁴."]
+    ]
+  },
+  {
+    id: "arithmetique",
+    theme: "Nombres et calculs",
+    icon: "🧩",
+    title: "Arithmétique : multiples, diviseurs, PGCD",
+    short: "Utiliser les critères de divisibilité, simplifier une fraction et raisonner sur des entiers.",
+    summary: "L’arithmétique aide à simplifier les fractions, chercher des diviseurs communs, résoudre des problèmes de répartition et reconnaître les nombres premiers.",
+    keywords: ["pgcd", "arithmétique", "multiple", "diviseur", "premier", "divisibilité", "simplifier"],
+    method: [
+      "Lister les diviseurs ou utiliser les décompositions quand les nombres sont grands.",
+      "Pour simplifier une fraction, diviser numérateur et dénominateur par un même diviseur.",
+      "Un nombre est divisible par 3 si la somme de ses chiffres est divisible par 3.",
+      "Un nombre premier a exactement deux diviseurs positifs : 1 et lui-même."
+    ],
+    cards: [
+      ["Multiple", "24 est un multiple de 6 car 24 = 6 × 4."],
+      ["Diviseur", "6 est un diviseur de 24 car 24 ÷ 6 est un nombre entier."],
+      ["PGCD", "Le PGCD de deux nombres est leur plus grand diviseur commun."],
+      ["Divisibilité par 9", "Un nombre est divisible par 9 si la somme de ses chiffres est divisible par 9."],
+      ["Nombre premier", "Un nombre premier a exactement deux diviseurs : 1 et lui-même."],
+      ["Simplifier une fraction", "On divise le numérateur et le dénominateur par un même diviseur commun."]
+    ]
+  },
+  {
+    id: "litteral",
+    theme: "Calcul littéral et équations",
+    icon: "𝑥",
+    title: "Calcul littéral : développer et factoriser",
+    short: "Manipuler des expressions avec x, développer, réduire et factoriser.",
+    summary: "Le calcul littéral sert à transformer une expression pour la rendre plus simple ou plus utile. Au brevet, il faut souvent développer, réduire, factoriser ou calculer une expression pour une valeur donnée.",
+    keywords: ["littéral", "développer", "factoriser", "réduire", "expression", "x", "identité"],
+    method: [
+      "Développer : distribuer le facteur à chaque terme de la parenthèse.",
+      "Réduire : regrouper les termes de même nature, par exemple les x avec les x.",
+      "Factoriser : repérer un facteur commun.",
+      "Remplacer x par sa valeur uniquement à la fin si l’expression peut être simplifiée avant."
+    ],
+    cards: [
+      ["Développer", "Transformer un produit en somme. Exemple : 3(x + 4) = 3x + 12."],
+      ["Réduire", "Regrouper les termes semblables. Exemple : 5x + 2x - 3 = 7x - 3."],
+      ["Factoriser", "Transformer une somme en produit. Exemple : 6x + 9 = 3(2x + 3)."],
+      ["Double distributivité", "(a + b)(c + d) = ac + ad + bc + bd."],
+      ["Carré d’une somme", "(a + b)² = a² + 2ab + b²."],
+      ["Calculer une expression", "Si A = 2x + 5 et x = 3, alors A = 2 × 3 + 5 = 11."]
+    ]
+  },
+  {
+    id: "equations",
+    theme: "Calcul littéral et équations",
+    icon: "⚖️",
+    title: "Équations et problèmes",
+    short: "Résoudre des équations du premier degré et modéliser un problème.",
+    summary: "Une équation exprime une égalité avec une inconnue. L’objectif est d’isoler l’inconnue sans déséquilibrer l’égalité.",
+    keywords: ["équation", "équations", "inconnue", "résoudre", "solution", "problème"],
+    method: [
+      "Supprimer les parenthèses si besoin.",
+      "Regrouper les termes avec x d’un côté et les nombres de l’autre.",
+      "Diviser par le coefficient de x.",
+      "Vérifier la solution dans l’équation de départ."
+    ],
+    cards: [
+      ["Solution d’une équation", "C’est la valeur de l’inconnue qui rend l’égalité vraie."],
+      ["Principe d’équilibre", "On peut ajouter, soustraire, multiplier ou diviser les deux membres par un même nombre non nul."],
+      ["Exemple", "2x + 5 = 13 donc 2x = 8 donc x = 4."],
+      ["Modéliser", "Traduire un énoncé en équation avant de calculer."],
+      ["Vérifier", "Remplacer x par la solution trouvée dans l’équation initiale."],
+      ["Erreur fréquente", "Ne pas changer le signe quand on passe un terme de l’autre côté."]
+    ]
+  },
+  {
+    id: "proportionnalite",
+    theme: "Organisation de données et fonctions",
+    icon: "%",
+    title: "Proportionnalité, pourcentages et vitesse",
+    short: "Tableaux de proportionnalité, pourcentages, échelles, vitesses et grandeurs composées.",
+    summary: "La proportionnalité est partout dans les sujets : prix, recettes, plans, vitesses, pourcentages, réductions et augmentations.",
+    keywords: ["proportionnalité", "pourcentage", "pourcentages", "vitesse", "échelle", "coefficient", "réduction", "augmentation"],
+    method: [
+      "Chercher le coefficient de proportionnalité quand c’est possible.",
+      "Pour un pourcentage, penser à multiplier par p/100.",
+      "Vitesse = distance ÷ temps, distance = vitesse × temps, temps = distance ÷ vitesse.",
+      "Pour une échelle, garder les mêmes unités avant de calculer."
+    ],
+    cards: [
+      ["Proportionnalité", "Deux grandeurs sont proportionnelles quand on passe de l’une à l’autre en multipliant toujours par le même nombre."],
+      ["20 % de 80", "20/100 × 80 = 16."],
+      ["Augmenter de 15 %", "Multiplier par 1,15."],
+      ["Diminuer de 30 %", "Multiplier par 0,70."],
+      ["Vitesse", "v = d / t."],
+      ["Échelle 1:100", "1 cm sur le plan représente 100 cm en réalité."]
+    ]
+  },
+  {
+    id: "fonctions",
+    theme: "Organisation de données et fonctions",
+    icon: "ƒ",
+    title: "Fonctions",
+    short: "Calculer une image, chercher un antécédent et reconnaître une fonction linéaire ou affine.",
+    summary: "Les fonctions permettent de relier une valeur de départ à une valeur d’arrivée. Au brevet, on les rencontre dans des tableaux, graphiques, formules ou programmes de calcul.",
+    keywords: ["fonction", "fonctions", "image", "antécédent", "affine", "linéaire", "graphique"],
+    method: [
+      "Pour calculer une image, remplacer x par la valeur donnée.",
+      "Pour chercher un antécédent, résoudre l’équation f(x) = valeur.",
+      "Une fonction linéaire est de la forme f(x) = ax.",
+      "Une fonction affine est de la forme f(x) = ax + b."
+    ],
+    cards: [
+      ["Image", "Si f(2) = 7, alors 7 est l’image de 2 par f."],
+      ["Antécédent", "Si f(2) = 7, alors 2 est un antécédent de 7 par f."],
+      ["Fonction linéaire", "Elle est de la forme f(x) = ax et traduit une situation de proportionnalité."],
+      ["Fonction affine", "Elle est de la forme f(x) = ax + b."],
+      ["Lire un graphique", "On part de x sur l’axe horizontal puis on lit y sur l’axe vertical."],
+      ["Programme de calcul", "On peut souvent le traduire par une fonction."]
+    ]
+  },
+  {
+    id: "statistiques",
+    theme: "Organisation de données et fonctions",
+    icon: "📊",
+    title: "Statistiques",
+    short: "Moyenne, médiane, étendue, fréquences et interprétation de données.",
+    summary: "Les statistiques servent à résumer une série de données. Au brevet, il faut souvent calculer mais aussi interpréter le résultat dans une phrase.",
+    keywords: ["statistiques", "moyenne", "médiane", "étendue", "fréquence", "série"],
+    method: [
+      "Pour la moyenne, additionner toutes les valeurs puis diviser par l’effectif total.",
+      "Pour la médiane, ranger les valeurs dans l’ordre croissant.",
+      "L’étendue est la plus grande valeur moins la plus petite.",
+      "Une fréquence peut s’exprimer en fraction, décimal ou pourcentage."
+    ],
+    cards: [
+      ["Moyenne", "Somme des valeurs divisée par le nombre de valeurs."],
+      ["Médiane", "Valeur qui partage la série ordonnée en deux groupes de même effectif."],
+      ["Étendue", "Maximum - minimum."],
+      ["Effectif", "Nombre de données dans une catégorie ou dans la série."],
+      ["Fréquence", "Effectif de la catégorie ÷ effectif total."],
+      ["Réflexe brevet", "Toujours faire une phrase d’interprétation après le calcul."]
+    ]
+  },
+  {
+    id: "probabilites",
+    theme: "Organisation de données et fonctions",
+    icon: "🎲",
+    title: "Probabilités",
+    short: "Calculer une probabilité simple, utiliser l’événement contraire et interpréter une expérience aléatoire.",
+    summary: "Les probabilités mesurent les chances qu’un événement se produise. Au brevet, les situations sont souvent des urnes, dés, roues, tirages ou arbres simples.",
+    keywords: ["probabilité", "probabilités", "hasard", "dé", "tirage", "urne", "contraire", "événement"],
+    method: [
+      "Identifier toutes les issues possibles.",
+      "Compter les issues favorables.",
+      "Calculer : probabilité = issues favorables ÷ issues possibles.",
+      "L’événement contraire a pour probabilité 1 - p."
+    ],
+    cards: [
+      ["Probabilité", "Nombre d’issues favorables ÷ nombre d’issues possibles."],
+      ["Événement certain", "Sa probabilité vaut 1."],
+      ["Événement impossible", "Sa probabilité vaut 0."],
+      ["Événement contraire", "Si P(A) = 0,3 alors P(non A) = 0,7."],
+      ["Dé équilibré", "Chaque face a une probabilité de 1/6."],
+      ["Réflexe", "Simplifier la fraction quand c’est possible."]
+    ]
+  },
+  {
+    id: "pythagore",
+    theme: "Espace et géométrie",
+    icon: "📐",
+    title: "Pythagore et sa réciproque",
+    short: "Calculer une longueur dans un triangle rectangle et prouver qu’un triangle est rectangle ou non.",
+    summary: "Le théorème de Pythagore s’utilise uniquement dans un triangle rectangle. Sa réciproque sert à démontrer qu’un triangle est rectangle.",
+    keywords: ["pythagore", "hypoténuse", "triangle rectangle", "réciproque", "longueur"],
+    method: [
+      "Repérer l’hypoténuse : c’est le plus grand côté, en face de l’angle droit.",
+      "Écrire l’égalité de Pythagore avec les noms des côtés.",
+      "Remplacer par les longueurs connues et calculer.",
+      "Pour la réciproque, comparer le carré du plus grand côté à la somme des carrés des deux autres."
+    ],
+    cards: [
+      ["Théorème de Pythagore", "Dans un triangle rectangle, hypoténuse² = côté1² + côté2²."],
+      ["Hypoténuse", "C’est le côté opposé à l’angle droit et le plus long côté du triangle rectangle."],
+      ["Réciproque", "Si le carré du plus grand côté est égal à la somme des carrés des deux autres, le triangle est rectangle."],
+      ["Contraposée", "Si l’égalité n’est pas vérifiée, le triangle n’est pas rectangle."],
+      ["Triplet classique", "3, 4, 5 forme un triangle rectangle car 3² + 4² = 5²."],
+      ["Erreur fréquente", "Ne jamais utiliser Pythagore si on ne sait pas que le triangle est rectangle."]
+    ]
+  },
+  {
+    id: "thales",
+    theme: "Espace et géométrie",
+    icon: "∥",
+    title: "Thalès et sa réciproque",
+    short: "Calculer des longueurs avec des droites parallèles et démontrer un parallélisme.",
+    summary: "Le théorème de Thalès relie des longueurs dans une configuration avec deux droites sécantes et deux droites parallèles.",
+    keywords: ["thalès", "thales", "parallèles", "rapport", "agrandissement", "réduction"],
+    method: [
+      "Vérifier que les points sont alignés dans le bon ordre.",
+      "Vérifier la présence de droites parallèles.",
+      "Écrire les rapports de longueurs correspondantes.",
+      "Utiliser le produit en croix pour trouver la longueur manquante."
+    ],
+    cards: [
+      ["Thalès", "Avec des droites parallèles, les longueurs correspondantes sont proportionnelles."],
+      ["Configuration", "Il faut deux droites sécantes et deux droites parallèles."],
+      ["Rapports", "On compare les longueurs situées sur les mêmes demi-droites."],
+      ["Produit en croix", "Si a/b = c/d alors a × d = b × c."],
+      ["Réciproque", "Elle permet de prouver que deux droites sont parallèles."],
+      ["Erreur fréquente", "Ne pas mélanger les côtés correspondants dans les rapports."]
+    ]
+  },
+  {
+    id: "trigo",
+    theme: "Espace et géométrie",
+    icon: "△",
+    title: "Trigonométrie",
+    short: "Utiliser cosinus, sinus et tangente dans un triangle rectangle.",
+    summary: "La trigonométrie permet de relier un angle aigu et des longueurs dans un triangle rectangle. Elle est très utile pour calculer une longueur ou un angle.",
+    keywords: ["trigonométrie", "trigo", "cosinus", "sinus", "tangente", "angle", "triangle rectangle"],
+    method: [
+      "Vérifier que le triangle est rectangle.",
+      "Par rapport à l’angle, repérer : hypoténuse, côté opposé, côté adjacent.",
+      "Choisir cos, sin ou tan selon les côtés connus et cherchés.",
+      "Utiliser la calculatrice et arrondir selon la consigne."
+    ],
+    cards: [
+      ["COS", "cos(angle) = adjacent / hypoténuse."],
+      ["SIN", "sin(angle) = opposé / hypoténuse."],
+      ["TAN", "tan(angle) = opposé / adjacent."],
+      ["SOH CAH TOA", "Sin = Opposé/Hypoténuse, Cos = Adjacent/Hypoténuse, Tan = Opposé/Adjacent."],
+      ["Calculer un angle", "On utilise cos⁻¹, sin⁻¹ ou tan⁻¹ sur la calculatrice."],
+      ["Erreur fréquente", "Le côté opposé et adjacent dépendent de l’angle choisi."]
+    ]
+  },
+  {
+    id: "transformations",
+    theme: "Espace et géométrie",
+    icon: "🔄",
+    title: "Transformations et homothéties",
+    short: "Reconnaître symétries, translations, rotations et homothéties.",
+    summary: "Les transformations déplacent ou agrandissent/réduisent des figures. L’homothétie est importante car elle multiplie toutes les longueurs par un même coefficient.",
+    keywords: ["transformation", "transformations", "symétrie", "translation", "rotation", "homothétie", "agrandissement", "réduction"],
+    method: [
+      "Identifier ce qui change et ce qui ne change pas : forme, taille, orientation.",
+      "Une translation glisse la figure sans la tourner.",
+      "Une rotation tourne autour d’un centre avec un angle donné.",
+      "Une homothétie multiplie les longueurs par un coefficient."
+    ],
+    cards: [
+      ["Translation", "Glissement selon une direction, un sens et une longueur."],
+      ["Rotation", "Tour autour d’un centre selon un angle."],
+      ["Symétrie axiale", "Effet miroir par rapport à une droite."],
+      ["Symétrie centrale", "Demi-tour autour d’un point."],
+      ["Homothétie", "Agrandissement ou réduction depuis un centre avec un coefficient."],
+      ["Coefficient", "Si k = 2, toutes les longueurs sont multipliées par 2."]
+    ]
+  },
+  {
+    id: "grandeurs",
+    theme: "Espace et géométrie",
+    icon: "📦",
+    title: "Grandeurs, aires, volumes et espace",
+    short: "Calculer périmètres, aires, volumes et convertir des unités.",
+    summary: "Les grandeurs apparaissent dans les problèmes concrets : solides, boîtes, piscines, surfaces, conversions et unités composées.",
+    keywords: ["aire", "aires", "volume", "volumes", "périmètre", "cylindre", "pavé", "unité", "conversion"],
+    method: [
+      "Écrire la formule avant de remplacer les valeurs.",
+      "Vérifier les unités : longueurs, aires, volumes ne se convertissent pas pareil.",
+      "Pour un volume, penser à exprimer le résultat en unité cube.",
+      "Arrondir uniquement à la fin du calcul."
+    ],
+    cards: [
+      ["Aire d’un triangle", "A = base × hauteur ÷ 2."],
+      ["Aire d’un disque", "A = π × rayon²."],
+      ["Volume d’un pavé droit", "V = longueur × largeur × hauteur."],
+      ["Volume d’un cylindre", "V = aire de la base × hauteur = πr²h."],
+      ["1 L", "1 L = 1 dm³."],
+      ["Conversion d’aires", "Entre deux unités d’aire voisines, on multiplie ou divise par 100."]
+    ]
+  },
+  {
+    id: "algo",
+    theme: "Algorithmique",
+    icon: "💻",
+    title: "Algorithmique et Scratch",
+    short: "Comprendre variables, boucles, conditions et programmes de calcul.",
+    summary: "L’algorithmique au brevet demande surtout de comprendre ce que fait un programme : suivre les instructions, calculer une sortie, repérer une boucle ou une condition.",
+    keywords: ["scratch", "algorithme", "algorithmique", "programme", "variable", "boucle", "condition"],
+    method: [
+      "Lire le programme ligne par ligne.",
+      "Noter la valeur des variables après chaque instruction.",
+      "Pour une boucle, répéter exactement le nombre de fois demandé.",
+      "Pour une condition, vérifier si elle est vraie ou fausse avant de choisir la branche."
+    ],
+    cards: [
+      ["Variable", "Boîte qui contient une valeur pouvant changer pendant le programme."],
+      ["Boucle", "Instruction qui répète plusieurs fois une action."],
+      ["Condition", "Instruction du type : si ... alors ... sinon ..."],
+      ["Programme de calcul", "Suite d’opérations que l’on peut traduire par une expression."],
+      ["Tester un programme", "Choisir une valeur simple et suivre toutes les étapes."],
+      ["Erreur fréquente", "Oublier de mettre à jour la variable à chaque passage dans une boucle."]
+    ]
+  }
+];
+
+const encouragements = [
+  "Bien joué, chaque question te rapproche du brevet.",
+  "Continue comme ça, l’important est de comprendre la méthode.",
+  "Très bon entraînement : même une erreur fait progresser.",
+  "Garde le rythme, tu construis des automatismes.",
+  "Super effort, relis l’explication et tu gagnes en précision.",
+  "Tu avances : méthode, calme, vérification."
+];
+
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
+const state = {
+  view: "home",
+  currentChapterId: null,
+  mode: "summary",
+  flashIndex: 0,
+  flashFlipped: false,
+  quiz: null
+};
+
+const progress = loadProgress();
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem("brevetMathsProgress");
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveProgress() {
+  localStorage.setItem("brevetMathsProgress", JSON.stringify(progress));
+  updateGlobalProgress();
+  updateProgressDots();
+}
+
+function resetProgress() {
+  const ok = window.confirm("Réinitialiser toute la progression de révision ?");
+  if (!ok) return;
+  Object.keys(progress).forEach(key => delete progress[key]);
+  localStorage.removeItem("brevetMathsProgress");
+  state.currentChapterId = null;
+  state.mode = "summary";
+  state.flashIndex = 0;
+  state.flashFlipped = false;
+  state.quiz = null;
+  renderHome();
+  updateGlobalProgress();
+  updateProgressDots();
+}
+
+function chapterProgress(id) {
+  if (!progress[id]) progress[id] = { bestQuiz: 0, quizzesDone: 0, cardsKnown: 0, lastMode: "summary" };
+  return progress[id];
+}
+
+function computeChapterPercent(chapter) {
+  const p = chapterProgress(chapter.id);
+  const cardPct = Math.min(1, p.cardsKnown / chapter.cards.length);
+  const quizPct = Math.min(1, p.bestQuiz / 100);
+  return Math.round(cardPct * 30 + quizPct * 70);
+}
+
+function updateGlobalProgress() {
+  const total = chapters.reduce((sum, chapter) => sum + computeChapterPercent(chapter), 0);
+  const pct = Math.round(total / chapters.length);
+  const node = $("#globalProgress");
+  if (node) node.textContent = `${pct}%`;
+}
+
+function updateProgressDots() {
+  chapters.forEach(chapter => {
+    const dot = document.querySelector(`[data-dot-for="${chapter.id}"]`);
+    if (!dot) return;
+    const pct = computeChapterPercent(chapter);
+    dot.classList.toggle("done", pct >= 75);
+    dot.classList.toggle("started", pct > 0 && pct < 75);
+  });
+}
+
+function gcd(a, b) {
+  a = Math.abs(a); b = Math.abs(b);
+  while (b) [a, b] = [b, a % b];
+  return a || 1;
+}
+
+function frac(n, d) {
+  const sign = n * d < 0 ? "-" : "";
+  n = Math.abs(n); d = Math.abs(d);
+  const g = gcd(n, d);
+  n /= g; d /= g;
+  return d === 1 ? `${sign}${n}` : `${sign}${n}/${d}`;
+}
+
+function comma(n, digits = 1) {
+  const value = Number.isInteger(n) ? n.toString() : n.toFixed(digits).replace(/\.0$/, "");
+  return value.replace(".", ",");
+}
+
+function unique(values) {
+  const out = [];
+  values.forEach(v => {
+    if (!out.includes(v)) out.push(v);
+  });
+  return out;
+}
+
+function shuffle(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor((i + 1) * 0.37) % (i + 1);
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function q(question, correct, wrongs, explanation, encouragement) {
+  const all = unique([String(correct), ...wrongs.map(String)]).slice(0, 4);
+  while (all.length < 4) all.push(`Autre réponse ${all.length}`);
+  return {
+    question,
+    correct: String(correct),
+    choices: shuffle(all),
+    explanation,
+    encouragement: encouragement || encouragements[Math.floor(Math.random() * encouragements.length)]
+  };
+}
+
+function makeQuiz(chapterId, series) {
+  const bank = quizFactories[chapterId](series);
+  return bank.slice(0, 20);
+}
+
+const quizFactories = {
+  calculs(series) {
+    const qs = [];
+    const base = series === "A" ? 0 : 5;
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      if (type === 0) {
+        const a = -8 + base + i;
+        const b = 3 + (i % 5);
+        const c = -2 - (i % 3);
+        const correct = a + b * c;
+        qs.push(q(`${a} + ${b} × (${c}) = ?`, correct, [(a + b) * c, a + b + c, a - b * c], "On effectue la multiplication avant l’addition.", "Bon réflexe : pense toujours aux priorités."));
+      } else if (type === 1) {
+        const d = [4, 5, 6, 8, 10][i % 5];
+        const n1 = 1 + (i % 3);
+        const n2 = 2 + ((i + base) % 4);
+        qs.push(q(`${n1}/${d} + ${n2}/${d} = ?`, frac(n1 + n2, d), [frac(n1 + n2, d * 2), frac(n1 * n2, d), `${n1 + n2}/${d + d}`], "Les dénominateurs sont identiques : on additionne les numérateurs puis on simplifie si possible.", "Très bien, les fractions deviennent plus simples avec l’habitude."));
+      } else if (type === 2) {
+        const a = -2 - (i % 6);
+        const b = series === "A" ? 3 + (i % 5) : -3 - (i % 5);
+        const correct = a * b;
+        qs.push(q(`(${a}) × (${b}) = ?`, correct, [-correct, a + b, a - b], "Pour une multiplication, deux signes différents donnent un résultat négatif ; deux signes identiques donnent un résultat positif.", "Tu progresses sur les signes, c’est une base essentielle."));
+      } else {
+        const a = 12 + i;
+        const b = 2 + (i % 4);
+        const c = 3 + (i % 3);
+        const correct = (a - b) / c;
+        qs.push(q(`(${a} - ${b}) ÷ ${c} = ?`, comma(correct, 2), [comma(a - b / c, 2), comma(a - b - c, 2), comma(a / c - b, 2)], "On calcule d’abord la parenthèse, puis on divise.", "Bonne méthode : parenthèses d’abord."));
+      }
+    }
+    return qs;
+  },
+
+  puissances(series) {
+    const qs = [];
+    const shift = series === "A" ? 0 : 2;
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      const a = 2 + (i % 5) + shift;
+      const b = 1 + ((i + 2) % 4);
+      if (type === 0) {
+        qs.push(q(`10^${a} × 10^${b} = ?`, `10^${a + b}`, [`10^${a * b}`, `10^${a - b}`, `${10 ** Math.min(a + b, 6)}`], "Quand on multiplie deux puissances de 10, on additionne les exposants.", "Excellent : les règles d’exposants font gagner du temps."));
+      } else if (type === 1) {
+        qs.push(q(`10^${a + b} ÷ 10^${b} = ?`, `10^${a}`, [`10^${a + 2 * b}`, `10^${b}`, `10^${a - b}`], "Quand on divise deux puissances de 10, on soustrait les exposants.", "Bien vu, la division se traduit par une soustraction d’exposants."));
+      } else if (type === 2) {
+        const coeff = [2.4, 3.7, 5.6, 8.1, 9.3][i % 5];
+        const exp = 3 + ((i + shift) % 4);
+        qs.push(q(`${comma(coeff)} × 10^${exp} correspond à quel nombre ?`, comma(coeff * 10 ** exp, 0), [comma(coeff * 10 ** (exp - 1), 0), comma(coeff * 10 ** (exp + 1), 0), comma(exp * 10 ** coeff, 0)], "Multiplier par 10ⁿ décale la virgule de n rangs vers la droite.", "Très bon entraînement pour l’écriture scientifique."));
+      } else {
+        const number = [4500, 72000, 860000, 3100000, 59000000][i % 5] * (series === "A" ? 1 : 10);
+        const exp = Math.floor(Math.log10(number));
+        const coeff = number / 10 ** exp;
+        qs.push(q(`Quelle est l’écriture scientifique de ${number.toLocaleString("fr-FR")} ?`, `${comma(coeff)} × 10^${exp}`, [`${comma(coeff * 10)} × 10^${exp - 1}`, `${comma(coeff / 10)} × 10^${exp + 1}`, `${comma(coeff)} × 10^${exp + 1}`], "Le nombre devant ×10 doit être supérieur ou égal à 1 et strictement inférieur à 10.", "Parfait, vérifie toujours que le coefficient est entre 1 et 10."));
+      }
+    }
+    return qs;
+  },
+
+  arithmetique(series) {
+    const qs = [];
+    const pairs = series === "A" ? [[18, 24], [28, 42], [45, 60], [36, 84], [48, 72]] : [[54, 90], [64, 96], [75, 100], [81, 108], [42, 70]];
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      if (type === 0) {
+        const n = [123, 246, 371, 504, 819, 1002][(i + (series === "A" ? 0 : 2)) % 6];
+        const ok = n % 3 === 0 ? "Oui" : "Non";
+        qs.push(q(`${n} est-il divisible par 3 ?`, ok, [ok === "Oui" ? "Non" : "Oui", "Seulement par 2", "Impossible à savoir"], "On additionne les chiffres : si la somme est divisible par 3, le nombre l’est aussi.", "Bon réflexe : les critères évitent de longs calculs."));
+      } else if (type === 1) {
+        const [a, b] = pairs[i % pairs.length];
+        const g = gcd(a, b);
+        qs.push(q(`Quel est le PGCD de ${a} et ${b} ?`, g, [g * 2, Math.max(1, g - 1), Math.min(a, b)], "Le PGCD est le plus grand diviseur commun des deux nombres.", "Très bien : le PGCD aide à simplifier les fractions."));
+      } else if (type === 2) {
+        const candidates = series === "A" ? [11, 15, 17, 21, 29] : [31, 33, 37, 39, 41];
+        const n = candidates[i % candidates.length];
+        const isPrime = isPrimeNumber(n);
+        qs.push(q(`${n} est-il un nombre premier ?`, isPrime ? "Oui" : "Non", [isPrime ? "Non" : "Oui", "Seulement s’il est pair", "Il n’a aucun diviseur"], "Un nombre premier a exactement deux diviseurs positifs : 1 et lui-même.", "Bonne vigilance : tester quelques diviseurs suffit souvent."));
+      } else {
+        const [a, b] = pairs[(i + 1) % pairs.length];
+        qs.push(q(`Simplifie la fraction ${a}/${b}.`, frac(a, b), [frac(a / 2, b), frac(a, b / 2), `${a + b}/${b}`], "On divise le numérateur et le dénominateur par leur PGCD.", "Très utile : une fraction simplifiée rapporte souvent des points."));
+      }
+    }
+    return qs;
+  },
+
+  litteral(series) {
+    const qs = [];
+    const shift = series === "A" ? 0 : 3;
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      const a = 2 + ((i + shift) % 5);
+      const b = 3 + (i % 6);
+      if (type === 0) {
+        qs.push(q(`Développe : ${a}(x + ${b})`, `${a}x + ${a * b}`, [`${a}x + ${b}`, `${a + b}x`, `${a}x + ${a + b}`], "On distribue le facteur devant la parenthèse à tous les termes.", "Très bien, la distributivité est un automatisme clé."));
+      } else if (type === 1) {
+        const c = 1 + (i % 4);
+        qs.push(q(`Réduis : ${a}x + ${b} + ${c}x - ${i % 5}`, `${a + c}x + ${b - (i % 5)}`, [`${a + c}x + ${b + (i % 5)}`, `${a + b + c - (i % 5)}x`, `${a - c}x + ${b}`], "On regroupe les termes en x ensemble et les nombres ensemble.", "Bonne organisation : sépare les x et les nombres."));
+      } else if (type === 2) {
+        qs.push(q(`Factorise : ${a * 2}x + ${a * b}`, `${a}(${2}x + ${b})`, [`${a}(x + ${b})`, `${2}(${a}x + ${b})`, `${a * 2}(x + ${b})`], "On repère un facteur commun : ici le facteur commun est le nombre placé devant la parenthèse.", "Bien joué : factoriser, c’est faire apparaître le facteur commun."));
+      } else {
+        const x = 1 + (i % 5);
+        qs.push(q(`Si x = ${x}, que vaut ${a}x + ${b} ?`, a * x + b, [a + x + b, a * (x + b), a * x - b], "On remplace x par sa valeur puis on calcule.", "Parfait : remplacer proprement x évite beaucoup d’erreurs."));
+      }
+    }
+    return qs;
+  },
+
+  equations(series) {
+    const qs = [];
+    const shift = series === "A" ? 0 : 2;
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      const a = 2 + ((i + shift) % 5);
+      const sol = 2 + (i % 7);
+      const b = 3 + (i % 6);
+      if (type === 0) {
+        const c = a * sol + b;
+        qs.push(q(`Résous : ${a}x + ${b} = ${c}`, `x = ${sol}`, [`x = ${sol + b}`, `x = ${c / a}`, `x = ${sol - 1}`], "On soustrait le nombre, puis on divise par le coefficient de x.", "Très bien, isole l’inconnue étape par étape."));
+      } else if (type === 1) {
+        const c = a * sol - b;
+        qs.push(q(`Résous : ${a}x - ${b} = ${c}`, `x = ${sol}`, [`x = ${sol - b}`, `x = ${sol + 1}`, `x = ${c + b}`], "On ajoute le nombre aux deux membres, puis on divise par le coefficient de x.", "Bon travail : garde l’équilibre de l’égalité."));
+      } else if (type === 2) {
+        const c = a * (sol + b);
+        qs.push(q(`Résous : ${a}(x + ${b}) = ${c}`, `x = ${sol}`, [`x = ${sol + b}`, `x = ${c / a}`, `x = ${sol - b}`], "On peut d’abord diviser par le facteur devant la parenthèse, puis enlever le nombre ajouté à x.", "Bonne lecture : les parenthèses se traitent avec méthode."));
+      } else {
+        const total = 3 * sol + 5;
+        qs.push(q(`Un nombre augmenté de 5 puis multiplié par 3 vaut ${total}. Quel est ce nombre ?`, sol, [sol + 5, total - 5, total / 3], "On traduit : 3(x + 5) = total, puis on résout.", "Très bien : traduire l’énoncé en équation, c’est la moitié du travail."));
+      }
+    }
+    return qs;
+  },
+
+  proportionnalite(series) {
+    const qs = [];
+    const shift = series === "A" ? 0 : 4;
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      if (type === 0) {
+        const price = 3 + ((i + shift) % 6);
+        const qty = 2 + (i % 5);
+        const target = qty + 3;
+        qs.push(q(`${qty} cahiers coûtent ${price * qty} €. Combien coûtent ${target} cahiers ?`, `${price * target} €`, [`${price + target} €`, `${price * qty + target} €`, `${price * (target - 1)} €`], "Le prix d’un cahier est constant : on utilise le coefficient de proportionnalité.", "Bien vu : revenir à l’unité est souvent très efficace."));
+      } else if (type === 1) {
+        const value = [60, 80, 120, 150, 200][i % 5];
+        const pct = [10, 15, 20, 25, 30][(i + shift) % 5];
+        qs.push(q(`${pct}% de ${value} = ?`, value * pct / 100, [value + pct, value - pct, pct / value], "p% d’une quantité se calcule avec p/100 × quantité.", "Très bien : les pourcentages deviennent rapides avec cette formule."));
+      } else if (type === 2) {
+        const price = [40, 60, 80, 120, 150][i % 5];
+        const discount = [10, 20, 25, 30, 40][(i + shift) % 5];
+        const finalPrice = price * (1 - discount / 100);
+        qs.push(q(`Un article de ${price} € baisse de ${discount}%. Nouveau prix ?`, `${comma(finalPrice, 2)} €`, [`${comma(price - discount, 2)} €`, `${comma(price * (1 + discount / 100), 2)} €`, `${comma(price * discount / 100, 2)} €`], "Une baisse de p% revient à multiplier par 1 - p/100.", "Excellent réflexe : pense au coefficient multiplicateur."));
+      } else {
+        const speed = [60, 80, 90, 100, 120][(i + shift) % 5];
+        const time = [1.5, 2, 2.5, 3, 0.5][i % 5];
+        qs.push(q(`À ${speed} km/h pendant ${comma(time)} h, quelle distance parcourt-on ?`, `${comma(speed * time, 1)} km`, [`${comma(speed / time, 1)} km`, `${comma(speed + time, 1)} km`, `${comma(time / speed, 2)} km`], "Distance = vitesse × temps.", "Bien joué : les unités aident à choisir la bonne formule."));
+      }
+    }
+    return qs;
+  },
+
+  fonctions(series) {
+    const qs = [];
+    const shift = series === "A" ? 0 : 2;
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      const a = 2 + ((i + shift) % 5);
+      const b = 1 + (i % 6);
+      const x = -2 + (i % 7);
+      if (type === 0) {
+        qs.push(q(`Soit f(x) = ${a}x + ${b}. Que vaut f(${x}) ?`, a * x + b, [a + x + b, a * (x + b), a * x - b], "On remplace x par la valeur donnée dans la formule.", "Très bien : image = valeur obtenue après calcul."));
+      } else if (type === 1) {
+        const target = a * x + b;
+        qs.push(q(`Soit f(x) = ${a}x + ${b}. Quel antécédent a pour image ${target} ?`, x, [target, x + b, target - b], "Chercher un antécédent revient à résoudre f(x) = valeur.", "Bon travail : antécédent = valeur de départ."));
+      } else if (type === 2) {
+        const form = i % 2 === 0 ? `${a}x` : `${a}x + ${b}`;
+        const answer = i % 2 === 0 ? "Linéaire" : "Affine non linéaire";
+        qs.push(q(`La fonction f(x) = ${form} est :`, answer, [answer === "Linéaire" ? "Affine non linéaire" : "Linéaire", "Constante", "Impossible à classer"], "Une fonction linéaire est de la forme ax ; une fonction affine est de la forme ax + b.", "Très bien : repérer la forme de la fonction aide beaucoup."));
+      } else {
+        qs.push(q(`Dans f(x) = ${a}x + ${b}, quel est le coefficient directeur ?`, a, [b, a + b, a * b], "Dans une fonction affine ax + b, le coefficient directeur est a.", "Parfait : a indique la pente de la droite."));
+      }
+    }
+    return qs;
+  },
+
+  statistiques(series) {
+    const qs = [];
+    const offset = series === "A" ? 0 : 2;
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      const data = [5 + offset, 8 + (i % 3), 10 + offset, 12 + (i % 4), 15 + offset].sort((a, b) => a - b);
+      if (type === 0) {
+        const mean = data.reduce((a, b) => a + b, 0) / data.length;
+        qs.push(q(`Quelle est la moyenne de la série ${data.join(" ; ")} ?`, comma(mean, 1), [comma(mean + 1, 1), comma(mean - 1, 1), data[2]], "Moyenne = somme des valeurs ÷ nombre de valeurs.", "Très bien : écris la somme pour éviter d’oublier une valeur."));
+      } else if (type === 1) {
+        qs.push(q(`Quelle est la médiane de la série ordonnée ${data.join(" ; ")} ?`, data[2], [data[0], data[4], comma((data[0] + data[4]) / 2, 1)], "Avec 5 valeurs ordonnées, la médiane est la 3e valeur.", "Bon réflexe : toujours ordonner avant la médiane."));
+      } else if (type === 2) {
+        qs.push(q(`Quelle est l’étendue de la série ${data.join(" ; ")} ?`, data[4] - data[0], [data[4] + data[0], data[2], data[4]], "Étendue = valeur maximale - valeur minimale.", "Parfait : l’étendue mesure l’écart entre extrêmes."));
+      } else {
+        const total = 20 + i;
+        const eff = 5 + (i % 6);
+        qs.push(q(`Dans une classe de ${total} élèves, ${eff} ont choisi l’option. Quelle est la fréquence ?`, frac(eff, total), [`${eff}/${eff + total}`, `${total}/${eff}`, frac(total - eff, total)], "Fréquence = effectif de la catégorie ÷ effectif total.", "Très bien : la fréquence est une part du total."));
+      }
+    }
+    return qs;
+  },
+
+  probabilites(series) {
+    const qs = [];
+    const shift = series === "A" ? 0 : 2;
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      if (type === 0) {
+        const red = 2 + ((i + shift) % 5);
+        const blue = 3 + (i % 4);
+        const total = red + blue;
+        qs.push(q(`Une urne contient ${red} boules rouges et ${blue} bleues. Probabilité de tirer une rouge ?`, frac(red, total), [frac(blue, total), frac(red, blue), `${red}/${total + red}`], "Probabilité = cas favorables ÷ cas possibles.", "Bien joué : commence toujours par compter le total."));
+      } else if (type === 1) {
+        const face = 1 + (i % 6);
+        qs.push(q(`Avec un dé équilibré, quelle est la probabilité d’obtenir ${face} ?`, "1/6", ["1/3", "1/2", "6/1"], "Un dé équilibré a 6 issues équiprobables.", "Très bon réflexe : chaque face a la même chance."));
+      } else if (type === 2) {
+        const p = [0.2, 0.25, 0.4, 0.6, 0.75][(i + shift) % 5];
+        qs.push(q(`Si P(A) = ${comma(p, 2)}, quelle est P(non A) ?`, comma(1 - p, 2), [comma(p + 0.1, 2), comma(p, 2), comma(1 + p, 2)], "La probabilité de l’événement contraire est 1 - P(A).", "Excellent : le contraire permet souvent d’aller plus vite."));
+      } else {
+        const total = [8, 10, 12, 20, 25][i % 5];
+        const fav = [2, 4, 3, 5, 10][(i + shift) % 5];
+        qs.push(q(`${fav} issues sont favorables sur ${total}. Quelle est la probabilité ?`, frac(fav, total), [frac(total - fav, total), frac(fav, total + fav), `${total}/${fav}`], "On divise le nombre d’issues favorables par le nombre total d’issues.", "Très bien : pense à simplifier la fraction."));
+      }
+    }
+    return qs;
+  },
+
+  pythagore(series) {
+    const qs = [];
+    const triples = series === "A" ? [[3,4,5], [5,12,13], [6,8,10], [8,15,17], [7,24,25]] : [[9,12,15], [10,24,26], [12,16,20], [20,21,29], [18,24,30]];
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      const [a, b, c] = triples[i % triples.length];
+      if (type === 0) {
+        qs.push(q(`Triangle rectangle : les côtés de l’angle droit mesurent ${a} cm et ${b} cm. Hypoténuse ?`, `${c} cm`, [`${a + b} cm`, `${Math.abs(b - a)} cm`, `${a * b} cm`], "On utilise c² = a² + b², puis on prend la racine carrée.", "Très bien : l’hypoténuse est toujours le plus grand côté."));
+      } else if (type === 1) {
+        qs.push(q(`Triangle rectangle : hypoténuse ${c} cm, un côté ${a} cm. Autre côté ?`, `${b} cm`, [`${c - a} cm`, `${a + c} cm`, `${Math.round(Math.sqrt(c*c + a*a))} cm`], "On calcule côté² = hypoténuse² - autre côté².", "Bonne méthode : quand on cherche un côté, on soustrait les carrés."));
+      } else if (type === 2) {
+        qs.push(q(`Les longueurs ${a} cm, ${b} cm, ${c} cm forment-elles un triangle rectangle ?`, "Oui", ["Non", "Seulement s’il est isocèle", "Impossible à savoir"], "On vérifie que le carré du plus grand côté est égal à la somme des carrés des deux autres.", "Parfait : c’est la réciproque de Pythagore."));
+      } else {
+        const wrongC = c + 1;
+        qs.push(q(`Les longueurs ${a} cm, ${b} cm, ${wrongC} cm forment-elles un triangle rectangle ?`, "Non", ["Oui", "Seulement si l’angle est aigu", "On ne peut pas tester"], "L’égalité de Pythagore n’est pas vérifiée, donc le triangle n’est pas rectangle.", "Très bien : comparer les carrés permet de conclure proprement."));
+      }
+    }
+    return qs;
+  },
+
+  thales(series) {
+    const qs = [];
+    const configs = series === "A" ? [[3,9,12,4], [4,10,15,6], [5,15,21,7], [2,8,20,5], [6,18,24,8]] : [[4,12,18,6], [5,20,28,7], [3,12,16,4], [7,21,30,10], [8,32,36,9]];
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      const [am, ab, ac, an] = configs[i % configs.length];
+      const ratio = am / ab;
+      if (type === 0) {
+        qs.push(q(`Dans une configuration de Thalès, AM=${am}, AB=${ab}, AC=${ac}. Si MN ∥ BC, combien vaut AN ?`, an, [an + 2, ac - an, am + ab], "Avec MN parallèle à BC, AM/AB = AN/AC. On utilise le produit en croix.", "Très bien : écris toujours les rapports correspondants."));
+      } else if (type === 1) {
+        qs.push(q(`Avec AM=${am} et AB=${ab}, quel est le rapport AM/AB ?`, frac(am, ab), [frac(ab, am), frac(am, am + ab), frac(ab - am, ab)], "Le rapport compare la petite longueur à la grande longueur correspondante.", "Bon réflexe : le rapport aide à trouver les autres longueurs."));
+      } else if (type === 2) {
+        const bc = 10 + (i % 4) * 2;
+        qs.push(q(`Si le rapport de réduction vaut ${frac(am, ab)} et BC=${bc}, alors MN vaut :`, comma(bc * ratio, 2), [comma(bc / ratio, 2), comma(bc + ratio, 2), comma(bc - ratio, 2)], "La petite longueur correspondante est obtenue en multipliant par le rapport de réduction.", "Excellent : Thalès, c’est de la proportionnalité en géométrie."));
+      } else {
+        qs.push(q(`Pour utiliser Thalès, quelle condition est indispensable ?`, "Avoir des droites parallèles", ["Avoir un triangle équilatéral", "Avoir un angle droit", "Avoir uniquement deux longueurs"], "Le théorème de Thalès repose sur une configuration avec des droites parallèles.", "Très bien : vérifier les hypothèses évite les erreurs."));
+      }
+    }
+    return qs;
+  },
+
+  trigo(series) {
+    const qs = [];
+    const angles = series === "A" ? [30, 35, 40, 45, 60] : [25, 32, 50, 55, 65];
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      const angle = angles[i % angles.length];
+      const hyp = 10 + (i % 5) * 2;
+      if (type === 0) {
+        qs.push(q(`Dans un triangle rectangle, cos(angle) = ?`, "adjacent / hypoténuse", ["opposé / hypoténuse", "opposé / adjacent", "hypoténuse / adjacent"], "Cosinus relie le côté adjacent et l’hypoténuse.", "Bien joué : SOH CAH TOA aide à mémoriser."));
+      } else if (type === 1) {
+        const opp = Math.sin(angle * Math.PI / 180) * hyp;
+        qs.push(q(`Hypoténuse ${hyp} cm, angle ${angle}°. Côté opposé ≈ ?`, `${comma(opp, 1)} cm`, [`${comma(Math.cos(angle * Math.PI / 180) * hyp, 1)} cm`, `${comma(Math.tan(angle * Math.PI / 180) * hyp, 1)} cm`, `${comma(hyp / Math.sin(angle * Math.PI / 180), 1)} cm`], "Le côté opposé se calcule avec sin(angle) = opposé / hypoténuse.", "Très bien : tu as choisi le sinus car on utilise opposé et hypoténuse."));
+      } else if (type === 2) {
+        const adj = 8 + (i % 5) * 2;
+        const opp = Math.tan(angle * Math.PI / 180) * adj;
+        qs.push(q(`Côté adjacent ${adj} cm, angle ${angle}°. Côté opposé ≈ ?`, `${comma(opp, 1)} cm`, [`${comma(Math.sin(angle * Math.PI / 180) * adj, 1)} cm`, `${comma(adj / Math.tan(angle * Math.PI / 180), 1)} cm`, `${comma(adj + angle, 1)} cm`], "Avec opposé et adjacent, on utilise la tangente.", "Parfait : tan = opposé / adjacent."));
+      } else {
+        qs.push(q(`Dans un triangle rectangle, tan(angle) = ?`, "opposé / adjacent", ["adjacent / hypoténuse", "opposé / hypoténuse", "adjacent / opposé"], "La tangente relie le côté opposé et le côté adjacent.", "Bon réflexe : identifie les côtés par rapport à l’angle."));
+      }
+    }
+    return qs;
+  },
+
+  transformations(series) {
+    const qs = [];
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      if (type === 0) {
+        qs.push(q("Quelle transformation correspond à un glissement sans tourner la figure ?", "Translation", ["Rotation", "Symétrie axiale", "Homothétie"], "Une translation déplace tous les points dans la même direction, le même sens et la même longueur.", "Très bien : translation = glissement."));
+      } else if (type === 1) {
+        qs.push(q("Quelle transformation correspond à un effet miroir par rapport à une droite ?", "Symétrie axiale", ["Symétrie centrale", "Translation", "Rotation"], "La symétrie axiale se fait par rapport à un axe.", "Bon réflexe : miroir = axe de symétrie."));
+      } else if (type === 2) {
+        const length = 4 + (i % 5);
+        const k = series === "A" ? 2 : 0.5;
+        qs.push(q(`Par une homothétie de coefficient ${comma(k)}, une longueur de ${length} cm devient :`, `${comma(length * k, 1)} cm`, [`${comma(length + k, 1)} cm`, `${comma(length / k, 1)} cm`, `${comma(length - k, 1)} cm`], "Une homothétie multiplie toutes les longueurs par son coefficient.", "Excellent : l’homothétie agit sur les longueurs par multiplication."));
+      } else {
+        qs.push(q("Une rotation est définie par :", "un centre, un angle et un sens", ["une longueur seulement", "deux droites parallèles", "un coefficient seulement"], "Pour tourner une figure, il faut un centre, un angle et un sens de rotation.", "Très bien : tu identifies les données nécessaires."));
+      }
+    }
+    return qs;
+  },
+
+  grandeurs(series) {
+    const qs = [];
+    const shift = series === "A" ? 0 : 2;
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      if (type === 0) {
+        const base = 6 + ((i + shift) % 5);
+        const height = 4 + (i % 6);
+        qs.push(q(`Aire d’un triangle de base ${base} cm et hauteur ${height} cm ?`, `${base * height / 2} cm²`, [`${base * height} cm²`, `${base + height} cm²`, `${2 * (base + height)} cm²`], "Aire du triangle = base × hauteur ÷ 2.", "Très bien : n’oublie pas de diviser par 2."));
+      } else if (type === 1) {
+        const l = 4 + (i % 5), w = 3 + ((i + shift) % 4), h = 2 + (i % 3);
+        qs.push(q(`Volume d’un pavé droit ${l} cm × ${w} cm × ${h} cm ?`, `${l * w * h} cm³`, [`${l + w + h} cm³`, `${2 * (l*w + l*h + w*h)} cm³`, `${l * w} cm³`], "Volume d’un pavé droit = longueur × largeur × hauteur.", "Parfait : un volume s’exprime en unité cube."));
+      } else if (type === 2) {
+        const r = 2 + (i % 4), h = 5 + ((i + shift) % 5);
+        qs.push(q(`Volume d’un cylindre de rayon ${r} cm et hauteur ${h} cm ?`, `${r*r*h}π cm³`, [`${2*r*h}π cm³`, `${r*h}π cm³`, `${r*r}π cm³`], "Volume du cylindre = aire de la base × hauteur = πr²h.", "Excellent : commence par l’aire du disque de base."));
+      } else {
+        const dm = 1 + (i % 5);
+        qs.push(q(`${dm} dm³ correspond à :`, `${dm} L`, [`${dm * 10} L`, `${dm * 100} L`, `${dm / 10} L`], "1 dm³ = 1 litre.", "Très utile : cette conversion revient souvent."));
+      }
+    }
+    return qs;
+  },
+
+  algo(series) {
+    const qs = [];
+    const shift = series === "A" ? 0 : 2;
+    for (let i = 0; i < 20; i++) {
+      const type = i % 4;
+      if (type === 0) {
+        const x = 2 + ((i + shift) % 5);
+        const result = (x + 3) * 2;
+        qs.push(q(`Programme : choisir ${x}, ajouter 3, multiplier par 2. Résultat ?`, result, [x + 6, x * 2 + 3, x + 3 * 2], "On suit les instructions dans l’ordre : d’abord +3, puis ×2.", "Bien joué : ligne par ligne, on évite les pièges."));
+      } else if (type === 1) {
+        const start = 1 + (i % 4);
+        const loops = 3 + ((i + shift) % 4);
+        const add = 2 + (i % 3);
+        qs.push(q(`Variable n=${start}. On répète ${loops} fois : ajouter ${add}. Valeur finale ?`, start + loops * add, [start + add, loops * add, start * loops + add], "Une boucle répète la même action plusieurs fois.", "Très bien : multiplie l’ajout par le nombre de répétitions."));
+      } else if (type === 2) {
+        const n = 4 + i;
+        const answer = n % 2 === 0 ? "Vrai" : "Faux";
+        qs.push(q(`Condition : “si n est pair”. Pour n=${n}, la condition est :`, answer, [answer === "Vrai" ? "Faux" : "Vrai", "Impossible", "Toujours vraie"], "Un nombre pair est divisible par 2.", "Bon réflexe : une condition se teste avant de choisir la branche."));
+      } else {
+        qs.push(q("Dans Scratch, une variable sert à :", "stocker une valeur qui peut changer", ["dessiner uniquement un cercle", "arrêter définitivement le programme", "créer une image fixe"], "Une variable est comme une boîte qui contient une valeur.", "Très bien : comprendre les variables aide à suivre le programme."));
+      }
+    }
+    return qs;
+  }
+};
+
+function isPrimeNumber(n) {
+  if (n < 2) return false;
+  for (let d = 2; d * d <= n; d++) if (n % d === 0) return false;
+  return true;
+}
+
+function init() {
+  renderSidebar();
+  wireMainNav();
+  wireResetButton();
+  renderHome();
+  updateGlobalProgress();
+}
+
+function wireResetButton() {
+  const resetButton = $("#resetProgress");
+  if (resetButton) resetButton.addEventListener("click", resetProgress);
+}
+
+function setTitle(title) {
+  $("#pageTitle").textContent = title;
+}
+
+function setActiveNav(view, chapterId = null) {
+  $$(".nav-item").forEach(btn => btn.classList.toggle("active", btn.dataset.view === view));
+  $$(".chapter-link").forEach(btn => btn.classList.toggle("active", btn.dataset.chapter === chapterId));
+}
+
+function renderSidebar() {
+  const menu = $("#chapterMenu");
+  menu.innerHTML = THEMES.map(theme => {
+    const items = chapters.filter(c => c.theme === theme).map(chapter => `
+      <button class="chapter-link" data-chapter="${chapter.id}">
+        <span class="chapter-icon">${chapter.icon}</span>
+        <span class="chapter-title">${chapter.title}</span>
+        <span class="chapter-progress-dot" data-dot-for="${chapter.id}"></span>
+      </button>
+    `).join("");
+    return `<section class="theme-group"><h3 class="theme-title">${theme}</h3>${items}</section>`;
+  }).join("");
+
+  $$(".chapter-link", menu).forEach(btn => {
+    btn.addEventListener("click", () => renderChapter(btn.dataset.chapter, chapterProgress(btn.dataset.chapter).lastMode || "summary"));
+  });
+  updateProgressDots();
+}
+
+function wireMainNav() {
+  $$(".nav-item").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const view = btn.dataset.view;
+      if (view === "home") renderHome();
+      if (view === "advice") renderAdvice();
+    });
+  });
+}
+
+function renderHome() {
+  state.view = "home";
+  state.currentChapterId = null;
+  setTitle("Tableau de bord");
+  setActiveNav("home");
+  const strongest = [...chapters].sort((a, b) => computeChapterPercent(b) - computeChapterPercent(a))[0];
+  const weakest = [...chapters].sort((a, b) => computeChapterPercent(a) - computeChapterPercent(b))[0];
+  $("#viewContainer").innerHTML = `
+    <section class="hero">
+      <article class="card hero-card">
+        <span class="pill lavender">Objectif brevet</span>
+        <h3>Réviser les maths de 3e sans se perdre.</h3>
+        <p>Choisis un chapitre, commence par les flashcards pour revoir la méthode, puis lance un QCM. Chaque question donne un encouragement et une correction courte pour aider ton élève à progresser.</p>
+        <div class="quick-actions">
+          <button class="btn lavender" data-open="${weakest.id}">Commencer le chapitre à travailler</button>
+          <button class="btn secondary" data-view-jump="advice">Voir les conseils brevet</button>
+        </div>
+      </article>
+      <article class="card">
+        <h3>Suivi rapide</h3>
+        <p><strong>À renforcer :</strong> ${weakest.title} (${computeChapterPercent(weakest)}%).</p>
+        <p><strong>Chapitre le plus avancé :</strong> ${strongest.title} (${computeChapterPercent(strongest)}%).</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:${Math.round(chapters.reduce((s,c)=>s+computeChapterPercent(c),0)/chapters.length)}%"></div></div>
+      </article>
+    </section>
+
+    <section class="card">
+      <div class="chapter-header">
+        <div>
+          <span class="pill mint">Programme 3e</span>
+          <h3>Chapitres disponibles</h3>
+          <p>Les chapitres sont regroupés par thèmes du programme de mathématiques du cycle 4 et orientés vers les attendus du brevet.</p>
+        </div>
+      </div>
+      <div class="grid four" style="margin-top:18px">
+        ${chapters.map(chapter => `
+          <article class="chapter-card">
+            <span class="pill ${pillClass(chapter.theme)}">${chapter.icon} ${chapter.theme}</span>
+            <h4>${chapter.title}</h4>
+            <p>${chapter.short}</p>
+            <div class="progress-bar"><div class="progress-fill" style="width:${computeChapterPercent(chapter)}%"></div></div>
+            <button class="btn secondary" data-open="${chapter.id}">Ouvrir</button>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+  $$('[data-open]').forEach(btn => btn.addEventListener("click", () => renderChapter(btn.dataset.open, "summary")));
+  $$('[data-view-jump]').forEach(btn => btn.addEventListener("click", () => {
+    if (btn.dataset.viewJump === "advice") renderAdvice();
+  }));
+}
+
+function pillClass(theme) {
+  if (theme.includes("Nombres")) return "blue";
+  if (theme.includes("littéral")) return "peach";
+  if (theme.includes("données")) return "mint";
+  if (theme.includes("géométrie")) return "lavender";
+  return "rose";
+}
+
+function renderChapter(id, mode = "summary") {
+  const chapter = chapters.find(c => c.id === id);
+  if (!chapter) return renderHome();
+  state.view = "chapter";
+  state.currentChapterId = id;
+  state.mode = mode;
+  state.quiz = null;
+  chapterProgress(id).lastMode = mode;
+  saveProgress();
+  setTitle(chapter.title);
+  setActiveNav("", id);
+
+  $("#viewContainer").innerHTML = `
+    <section class="card">
+      <div class="chapter-header">
+        <div>
+          <span class="pill ${pillClass(chapter.theme)}">${chapter.icon} ${chapter.theme}</span>
+          <h3>${chapter.title}</h3>
+          <p>${chapter.summary}</p>
+        </div>
+        <div class="streak-card">
+          <span class="streak-number">${computeChapterPercent(chapter)}%</span>
+          <span>maîtrise</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="mode-tabs">
+        <button class="mode-tab ${mode === "summary" ? "active" : ""}" data-mode="summary">Méthode</button>
+        <button class="mode-tab ${mode === "flashcards" ? "active" : ""}" data-mode="flashcards">Flashcards</button>
+        <button class="mode-tab ${mode === "quiz" ? "active" : ""}" data-mode="quiz">QCM</button>
+      </div>
+      <div id="chapterModeContainer"></div>
+    </section>
+  `;
+  $$(".mode-tab").forEach(btn => btn.addEventListener("click", () => renderChapter(id, btn.dataset.mode)));
+  if (mode === "summary") renderChapterSummary(chapter);
+  if (mode === "flashcards") renderFlashcards(chapter);
+  if (mode === "quiz") renderQuizSetup(chapter);
+}
+
+function renderChapterSummary(chapter) {
+  $("#chapterModeContainer").innerHTML = `
+    <div class="grid two">
+      <article>
+        <h3>Méthode à retenir</h3>
+        <ol class="method-list">${chapter.method.map(step => `<li>${step}</li>`).join("")}</ol>
+      </article>
+      <article>
+        <h3>Comment travailler ce chapitre ?</h3>
+        <p>1. Lire les flashcards une première fois sans chercher à aller vite.</p>
+        <p>2. Faire une série de 5 questions pour tester les bases.</p>
+        <p>3. Refaire ensuite une série de 15 ou 20 questions pour gagner en endurance.</p>
+        <div class="quick-actions">
+          <button class="btn mint" data-jump-mode="flashcards">Lancer les flashcards</button>
+          <button class="btn lavender" data-jump-mode="quiz">Lancer un QCM</button>
+        </div>
+      </article>
+    </div>
+  `;
+  $$('[data-jump-mode]').forEach(btn => btn.addEventListener("click", () => renderChapter(chapter.id, btn.dataset.jumpMode)));
+}
+
+function renderFlashcards(chapter) {
+  state.flashIndex = Math.min(state.flashIndex, chapter.cards.length - 1);
+  state.flashFlipped = false;
+  drawFlashcard(chapter);
+}
+
+function drawFlashcard(chapter) {
+  const [front, back] = chapter.cards[state.flashIndex];
+  const known = chapterProgress(chapter.id).cardsKnown;
+  const pct = Math.round(((state.flashIndex + 1) / chapter.cards.length) * 100);
+  $("#chapterModeContainer").innerHTML = `
+    <div class="flashcard-stage">
+      <div class="quiz-meta">
+        <span class="pill lavender">Carte ${state.flashIndex + 1}/${chapter.cards.length}</span>
+        <span class="pill mint">${known}/${chapter.cards.length} cartes maîtrisées</span>
+      </div>
+      <button class="flashcard" id="flashcardButton" aria-label="Retourner la flashcard">
+        <div class="label">${state.flashFlipped ? "Réponse" : "Question"}</div>
+        <div class="content">${state.flashFlipped ? back : front}</div>
+        <div class="hint">Clique pour retourner la carte</div>
+      </button>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="flashcard-actions">
+        <div class="left">
+          <button class="btn secondary" id="prevCard" ${state.flashIndex === 0 ? "disabled" : ""}>← Précédente</button>
+          <button class="btn secondary" id="nextCard" ${state.flashIndex === chapter.cards.length - 1 ? "disabled" : ""}>Suivante →</button>
+        </div>
+        <div class="left">
+          <button class="btn peach" id="reviewCard">À revoir</button>
+          <button class="btn mint" id="knowCard">Je savais</button>
+        </div>
+      </div>
+    </div>
+  `;
+  $("#flashcardButton").addEventListener("click", () => {
+    state.flashFlipped = !state.flashFlipped;
+    drawFlashcard(chapter);
+  });
+  $("#prevCard").addEventListener("click", () => { state.flashIndex--; state.flashFlipped = false; drawFlashcard(chapter); });
+  $("#nextCard").addEventListener("click", () => { state.flashIndex++; state.flashFlipped = false; drawFlashcard(chapter); });
+  $("#knowCard").addEventListener("click", () => {
+    const p = chapterProgress(chapter.id);
+    p.cardsKnown = Math.max(p.cardsKnown, state.flashIndex + 1);
+    saveProgress();
+    if (state.flashIndex < chapter.cards.length - 1) state.flashIndex++;
+    state.flashFlipped = false;
+    drawFlashcard(chapter);
+  });
+  $("#reviewCard").addEventListener("click", () => {
+    if (state.flashIndex < chapter.cards.length - 1) state.flashIndex++;
+    state.flashFlipped = false;
+    drawFlashcard(chapter);
+  });
+}
+
+function renderQuizSetup(chapter) {
+  $("#chapterModeContainer").innerHTML = `
+    <div class="quiz-card">
+      <div>
+        <h3>Configurer le QCM</h3>
+        <p>Choisis une série et le nombre de questions. Les deux séries contiennent jusqu’à 20 questions chacune.</p>
+      </div>
+      <div class="quiz-setup">
+        <div class="form-field">
+          <label for="seriesSelect">Série</label>
+          <select id="seriesSelect">
+            <option value="A">Série A · bases et automatismes</option>
+            <option value="B">Série B · entraînement renforcé</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="countSelect">Nombre de questions</label>
+          <select id="countSelect">
+            <option value="5">5 questions</option>
+            <option value="10">10 questions</option>
+            <option value="15">15 questions</option>
+            <option value="20">20 questions</option>
+          </select>
+        </div>
+        <button class="btn lavender" id="startQuiz">Démarrer le QCM</button>
+      </div>
+    </div>
+  `;
+  $("#startQuiz").addEventListener("click", () => startQuiz(chapter));
+}
+
+function startQuiz(chapter) {
+  const series = $("#seriesSelect").value;
+  const count = Number($("#countSelect").value);
+  state.quiz = {
+    chapter,
+    series,
+    questions: makeQuiz(chapter.id, series).slice(0, count),
+    index: 0,
+    score: 0,
+    answered: false,
+    selected: null
+  };
+  drawQuizQuestion();
+}
+
+function drawQuizQuestion() {
+  const quiz = state.quiz;
+  const item = quiz.questions[quiz.index];
+  const pct = Math.round(((quiz.index) / quiz.questions.length) * 100);
+  $("#chapterModeContainer").innerHTML = `
+    <div class="quiz-card">
+      <div class="quiz-meta">
+        <span class="pill lavender">${quiz.chapter.title}</span>
+        <span class="pill blue">Série ${quiz.series}</span>
+        <span class="pill mint">Question ${quiz.index + 1}/${quiz.questions.length}</span>
+        <span class="pill peach">Score : ${quiz.score}</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="question">${item.question}</div>
+      <div class="choices">
+        ${item.choices.map((choice, idx) => `<button class="choice" data-choice="${escapeAttr(choice)}">${choice}</button>`).join("")}
+      </div>
+      <div id="feedbackZone"></div>
+      <div class="quiz-actions">
+        <div class="left">
+          <button class="btn secondary" id="stopQuiz">Arrêter</button>
+        </div>
+        <button class="btn lavender" id="nextQuestion" disabled>${quiz.index === quiz.questions.length - 1 ? "Voir le résultat" : "Question suivante"}</button>
+      </div>
+    </div>
+  `;
+  $$(".choice").forEach(btn => btn.addEventListener("click", () => answerQuestion(btn.dataset.choice)));
+  $("#nextQuestion").addEventListener("click", () => nextQuestion());
+  $("#stopQuiz").addEventListener("click", () => renderQuizSetup(quiz.chapter));
+}
+
+function answerQuestion(choice) {
+  const quiz = state.quiz;
+  if (quiz.answered) return;
+  const item = quiz.questions[quiz.index];
+  quiz.answered = true;
+  quiz.selected = choice;
+  const good = choice === item.correct;
+  if (good) quiz.score++;
+  $$(".choice").forEach(btn => {
+    btn.disabled = true;
+    if (btn.dataset.choice === item.correct) btn.classList.add("correct");
+    if (btn.dataset.choice === choice && !good) btn.classList.add("wrong");
+  });
+  $("#feedbackZone").innerHTML = `
+    <div class="feedback">
+      <strong>${good ? "Bravo, bonne réponse !" : "Pas grave, on corrige."}</strong>
+      ${item.encouragement}<br>
+      <strong>Correction :</strong> ${item.explanation}<br>
+      <strong>Réponse attendue :</strong> ${item.correct}
+    </div>
+  `;
+  $("#nextQuestion").disabled = false;
+}
+
+function nextQuestion() {
+  const quiz = state.quiz;
+  if (quiz.index < quiz.questions.length - 1) {
+    quiz.index++;
+    quiz.answered = false;
+    quiz.selected = null;
+    drawQuizQuestion();
+  } else {
+    drawQuizResult();
+  }
+}
+
+function drawQuizResult() {
+  const quiz = state.quiz;
+  const pct = Math.round((quiz.score / quiz.questions.length) * 100);
+  const p = chapterProgress(quiz.chapter.id);
+  p.bestQuiz = Math.max(p.bestQuiz, pct);
+  p.quizzesDone += 1;
+  saveProgress();
+  const message = pct >= 80 ? "Très solide : ton élève peut passer à des exercices type brevet." : pct >= 50 ? "Bon début : il faut refaire une série puis reprendre les erreurs." : "Il faut reprendre les flashcards et refaire une petite série de 5 questions.";
+  $("#chapterModeContainer").innerHTML = `
+    <div class="empty-state">
+      <span class="pill mint">QCM terminé</span>
+      <p class="score-big">${quiz.score}/${quiz.questions.length}</p>
+      <h3>${pct}% de réussite</h3>
+      <p>${message}</p>
+      <div class="quick-actions" style="justify-content:center">
+        <button class="btn lavender" id="redoQuiz">Refaire un QCM</button>
+        <button class="btn secondary" id="goCards">Revoir les flashcards</button>
+      </div>
+    </div>
+  `;
+  $("#redoQuiz").addEventListener("click", () => renderQuizSetup(quiz.chapter));
+  $("#goCards").addEventListener("click", () => renderChapter(quiz.chapter.id, "flashcards"));
+}
+
+function renderAdvice() {
+  state.view = "advice";
+  state.currentChapterId = null;
+  setTitle("Conseils pour le brevet");
+  setActiveNav("advice");
+  $("#viewContainer").innerHTML = `
+    <section class="card hero-card">
+      <span class="pill lavender">Méthode d’examen</span>
+      <h3>Réussir le brevet de maths : stratégie simple.</h3>
+      <p>Le but n’est pas de tout faire parfaitement, mais de prendre le maximum de points avec une copie claire, des méthodes sûres et une bonne gestion du temps.</p>
+    </section>
+
+    <section class="grid two">
+      <article class="card">
+        <h3>Avant l’épreuve</h3>
+        <div class="advice-list">
+          ${adviceBefore.map((item, idx) => adviceItem(idx + 1, item[0], item[1])).join("")}
+        </div>
+      </article>
+      <article class="card">
+        <h3>Pendant l’épreuve</h3>
+        <div class="advice-list">
+          ${adviceDuring.map((item, idx) => adviceItem(idx + 1, item[0], item[1])).join("")}
+        </div>
+      </article>
+    </section>
+
+    <section class="card">
+      <h3>Checklist de copie</h3>
+      <div class="grid three">
+        <div class="chapter-card"><span class="pill blue">Calcul</span><h4>Je montre les étapes</h4><p>Pas seulement le résultat : une ligne de méthode peut sauver des points.</p></div>
+        <div class="chapter-card"><span class="pill mint">Géométrie</span><h4>Je cite le théorème</h4><p>Thalès, Pythagore ou trigonométrie doivent être nommés et justifiés.</p></div>
+        <div class="chapter-card"><span class="pill peach">Problème</span><h4>Je conclus par une phrase</h4><p>La réponse doit être claire, avec l’unité si nécessaire.</p></div>
+      </div>
+    </section>
+  `;
+}
+
+const adviceBefore = [
+  ["Revoir les automatismes", "Priorités, fractions, puissances, pourcentages et équations doivent être travaillés un peu chaque jour."],
+  ["Alterner court et long", "Faire des QCM de 5 questions pour s’échauffer, puis des séries de 15 ou 20 pour tenir l’effort."],
+  ["Faire une fiche erreurs", "Noter les erreurs récurrentes : signe oublié, mauvaise unité, formule mal choisie, phrase de conclusion absente."],
+  ["S’entraîner au brouillon", "Apprendre à poser les calculs proprement sans recopier tout l’énoncé."],
+  ["Dormir et manger correctement", "Une bonne concentration vaut autant qu’une dernière heure de révision bâclée."]
+];
+
+const adviceDuring = [
+  ["Lire tout le sujet", "Commencer par les exercices les plus accessibles pour marquer vite des points."],
+  ["Encadrer les résultats", "Le correcteur doit repérer facilement la réponse finale."],
+  ["Ne pas bloquer", "Si une question résiste plus de quelques minutes, passer à la suite et revenir après."],
+  ["Utiliser les unités", "Les cm, m², km/h ou euros aident à vérifier si la formule choisie est logique."],
+  ["Faire des phrases", "Une conclusion courte du type “Donc la distance est de...” rend la copie plus claire."]
+];
+
+function adviceItem(num, title, text) {
+  return `<div class="advice-item"><div class="advice-icon">${num}</div><div><h4>${title}</h4><p>${text}</p></div></div>`;
+}
+
+
+function escapeAttr(value) {
+  return String(value).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+document.addEventListener("DOMContentLoaded", init);
